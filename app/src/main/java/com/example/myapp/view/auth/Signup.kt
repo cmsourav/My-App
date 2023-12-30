@@ -39,9 +39,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.myapp.data.Resource
-import com.example.myapp.navigation.ROUTE_HOME
-import com.example.myapp.navigation.ROUTE_LOGIN
-import com.example.myapp.navigation.ROUTE_SIGNUP
+import com.example.myapp.navigation.HomeNav.ROUTE_HOME
+import com.example.myapp.navigation.AppNav.ROUTE_LOGIN
+import com.example.myapp.navigation.AppNav.ROUTE_SIGNUP
 import com.example.myapp.ui.theme.MyAppTheme
 import com.example.myapp.viewModel.AuthViewModel
 
@@ -193,4 +193,3 @@ fun PreviewSignupScreenDark() {
         SignupScreen(null, navController = rememberNavController())
     }
 }
-

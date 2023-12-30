@@ -40,9 +40,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.myapp.data.Resource
-import com.example.myapp.navigation.ROUTE_HOME
-import com.example.myapp.navigation.ROUTE_LOGIN
-import com.example.myapp.navigation.ROUTE_SIGNUP
+import com.example.myapp.navigation.HomeNav.ROUTE_HOME
+import com.example.myapp.navigation.AppNav.ROUTE_LOGIN
+import com.example.myapp.navigation.AppNav.ROUTE_SIGNUP
 import com.example.myapp.ui.theme.MyAppTheme
 import com.example.myapp.viewModel.AuthViewModel
 
@@ -147,7 +147,7 @@ fun LoginScreen(
                     is Resource.Success -> {
                         LaunchedEffect(Unit) {
                             navController.navigate(ROUTE_HOME) {
-                                popUpTo(ROUTE_HOME) { inclusive = true }
+                                popUpTo(ROUTE_LOGIN) { inclusive = true }
                             }
                         }
                     }
