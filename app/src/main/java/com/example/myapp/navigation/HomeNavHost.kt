@@ -23,15 +23,20 @@ import com.example.myapp.view.home.ReferralReportScreen
 import com.example.myapp.view.home.TotalAdmissionScreen
 import com.example.myapp.view.home.UserInfo
 import com.example.myapp.viewModel.AuthViewModel
+import com.example.myapp.viewModel.HomeViewModel
 
 
-fun NavGraphBuilder.homeNavGraph(viewModel : AuthViewModel, navController : NavHostController) {
+fun NavGraphBuilder.homeNavGraph(
+    authViewModel : AuthViewModel,
+    homeViewModel : HomeViewModel,
+    navController : NavHostController
+) {
     navigation(startDestination = ROUTE_HOME, route = HomeNav.HOME_ROUTE) {
         composable(ROUTE_HOME) {
-            HomeScreen(viewModel, navController)
+            HomeScreen(authViewModel, navController)
         }
         composable(ROUTE_COLLEGE) {
-            CollegeScreen()
+            CollegeScreen(homeViewModel = homeViewModel, navController = navController)
         }
         composable(ROUTE_COURSE) {
             CourseScreen()
@@ -52,7 +57,7 @@ fun NavGraphBuilder.homeNavGraph(viewModel : AuthViewModel, navController : NavH
             OnHoldScreen()
         }
         composable(ROUTE_SETTINGS) {
-            UserInfo(viewModel = viewModel, navController = navController)
+            UserInfo(viewModel = authViewModel, navController = navController)
         }
     }
 }

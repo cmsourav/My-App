@@ -44,6 +44,7 @@ import com.example.myapp.navigation.HomeNav.ROUTE_HOME
 import com.example.myapp.navigation.AppNav.ROUTE_LOGIN
 import com.example.myapp.navigation.AppNav.ROUTE_SIGNUP
 import com.example.myapp.ui.theme.MyAppTheme
+import com.example.myapp.view.components.ErrorToastMessage
 import com.example.myapp.viewModel.AuthViewModel
 
 @Composable
@@ -134,10 +135,7 @@ fun LoginScreen(
             loginFlow?.value?.let {
                 when (it) {
                     is Resource.Failure -> {
-                        val context = LocalContext.current
-                        LaunchedEffect(Unit) {
-                            Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
-                        }
+                        ErrorToastMessage(it)
                     }
 
                     is Resource.Loading -> {
