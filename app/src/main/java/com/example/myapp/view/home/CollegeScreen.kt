@@ -1,5 +1,6 @@
 package com.example.myapp.view.home
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -85,7 +86,7 @@ fun CollegeList(
             CollegeCard(
                 image = R.drawable.college_icon,
                 collegeItem = collegeData[0],
-                onClick = {}
+                onClick = { Log.e("sss/", it.toString()) }
             )
         } else {
             LazyVerticalGrid(
@@ -96,7 +97,7 @@ fun CollegeList(
                     CollegeCard(
                         image = R.drawable.college_icon,
                         collegeItem = item,
-                        onClick = {}
+                        onClick = { Log.e("sss/", it.toString()) }
                     )
                 }
             }
@@ -109,14 +110,14 @@ fun CollegeList(
 fun CollegeCard(
     image : Int,
     collegeItem : College,
-    onClick : (String) -> Unit,
+    onClick : (College) -> Unit,
 ) {
     Card(
         modifier = Modifier
             .height(230.dp)
             .padding(12.dp)
             .background(shape = RoundedCornerShape(12.dp), color = Color.White)
-            .clickable(onClick = { collegeItem.id?.let { onClick(it) } }),
+            .clickable(onClick = { onClick(collegeItem) }),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 8.dp),
         colors = CardDefaults.elevatedCardColors(containerColor = Color.White)
@@ -187,52 +188,40 @@ fun PreviewCollegeList() {
     )
     val collegeData = listOf(
         College(
-            id = "KABLR24010402",
+            collegeID = "KABLR24010402",
             collegeName = "BGS Group of Institution",
             state = "Karnataka",
             district = "Bangalore",
             country = "India",
             university = "Bangalore university",
-            approvals = listOf("INC"),
-            autonomous = false,
-            deemed = false,
-            courses = courseDataOne
+            course = courseDataOne
         ),
         College(
-            id = "KABLR24010403",
+            collegeID = "KABLR24010403",
             collegeName = "PA College",
             state = "Karnataka",
             district = "Mangalore",
             country = "India",
             university = "Bangalore university",
-            approvals = listOf("AICTE", "UGC"),
-            autonomous = false,
-            deemed = false,
-            courses = courseDataOne
+            course = courseDataOne
         ),
         College(
-            id = "TNED24010404",
-            collegeName = "Excel Engineering and technology in a model College",
+            collegeID = "TNED24010404",
+            collegeName = "Excel Engineering College",
             state = "Tamilnadu",
             district = "Erode",
             country = "India",
             university = "Anna university chennai",
-            approvals = listOf("AICTE", "UGC"),
-            autonomous = true,
-            deemed = false,
-            courses = courseDataOne
+            course = courseDataOne
         ),
         College(
-            id = "TNCBE24010405",
+            collegeID = "TNCBE24010405",
             collegeName = "RVS Nursing College",
             state = "Tamilnadu",
             district = "Coimbatore",
             country = "India",
             university = "MGR university",
-            approvals = listOf("INC"),
-            autonomous = false,
-            deemed = true,
-            courses = courseDataOne
+            course = courseDataOne
         )
     )
     CollegeList(
@@ -261,16 +250,13 @@ fun PreviewCollegeCard() {
         )
     )
     val collegeData = College(
-        id = "KABLR24010402",
+        collegeID = "KABLR24010402",
         collegeName = "BGS Group of Institution",
         state = "Karnataka",
         district = "Bangalore",
         country = "India",
         university = "Bangalore university",
-        approvals = listOf("INC"),
-        autonomous = false,
-        deemed = false,
-        courses = courseData
+        course = courseData
     )
     CollegeCard(
         image = R.drawable.college_icon,
