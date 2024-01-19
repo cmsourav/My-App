@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.myapp.navigation.HomeNav.ROUTE_APPROVED_ADMISSION
 import com.example.myapp.navigation.HomeNav.ROUTE_COLLEGE
+import com.example.myapp.navigation.HomeNav.ROUTE_COLLEGE_DETAILS
 import com.example.myapp.navigation.HomeNav.ROUTE_COURSE
 import com.example.myapp.navigation.HomeNav.ROUTE_HOME
 import com.example.myapp.navigation.HomeNav.ROUTE_ON_HOLD
@@ -14,6 +15,7 @@ import com.example.myapp.navigation.HomeNav.ROUTE_REFERRAL_REPORT
 import com.example.myapp.navigation.HomeNav.ROUTE_SETTINGS
 import com.example.myapp.navigation.HomeNav.ROUTE_TOTAL_ADMISSION
 import com.example.myapp.view.home.ApprovedAdmissionScreen
+import com.example.myapp.view.home.CollegeDetailScreen
 import com.example.myapp.view.home.CollegeScreen
 import com.example.myapp.view.home.CourseScreen
 import com.example.myapp.view.home.HomeScreen
@@ -58,6 +60,9 @@ fun NavGraphBuilder.homeNavGraph(
         }
         composable(ROUTE_SETTINGS) {
             UserInfo(viewModel = authViewModel, navController = navController)
+        }
+        composable(ROUTE_COLLEGE_DETAILS) {
+            CollegeDetailScreen(navController = navController, homeViewModel = homeViewModel)
         }
     }
 }

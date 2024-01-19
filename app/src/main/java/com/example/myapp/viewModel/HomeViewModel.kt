@@ -1,9 +1,12 @@
 package com.example.myapp.viewModel
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapp.data.HomeRepository
 import com.example.myapp.data.Resource
+import com.example.myapp.model.College
 import com.example.myapp.model.Colleges
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -20,6 +23,7 @@ class HomeViewModel @Inject constructor(
     private val _collegeData = MutableStateFlow<Resource<Colleges>?>(null)
     val collegeData : StateFlow<Resource<Colleges>?> = _collegeData
 
+    var sharedCollegeData: MutableState<College?> = mutableStateOf(null)
     fun getDataFromRepo() = viewModelScope.launch {
         _collegeData.value = Resource.Loading
         delay(1000)
