@@ -17,4 +17,5 @@ object HomeNav {
     const val ROUTE_REFERRAL_REPORT = "referral_report"
     const val ROUTE_ON_HOLD = "on_hold"
     const val ROUTE_SETTINGS = "settings"
+    const val ROUTE_COLLEGE_DETAILS = "college_details"
 }

@@ -1,6 +1,5 @@
 package com.example.myapp.view.home
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,6 +38,8 @@ import com.example.myapp.R
 import com.example.myapp.data.Resource
 import com.example.myapp.model.College
 import com.example.myapp.model.Course
+import com.example.myapp.navigation.HomeNav
+import com.example.myapp.navigation.HomeNav.ROUTE_COLLEGE_DETAILS
 import com.example.myapp.view.components.CustomTopAppBar
 import com.example.myapp.view.components.ErrorToastMessage
 import com.example.myapp.viewModel.HomeViewModel
@@ -62,6 +63,7 @@ fun CollegeScreen(
             is Resource.Success -> {
                 it.result.college?.let { items ->
                     CollegeList(
+                        homeViewModel = homeViewModel,
                         collegeData = items,
                         navController = navController
                     )
@@ -73,20 +75,24 @@ fun CollegeScreen(
 
 @Composable
 fun CollegeList(
+    homeViewModel : HomeViewModel?,
     collegeData : List<College>,
     navController : NavHostController,
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        CustomTopAppBar(title = "College Details") {
+        CustomTopAppBar(title = "Colleges") {
             navController.popBackStack()
         }
         if (collegeData.size == 1) {
             CollegeCard(
                 image = R.drawable.college_icon,
                 collegeItem = collegeData[0],
-                onClick = { Log.e("sss/", it.toString()) }
+                onClick = {
+                    homeViewModel?.sharedCollegeData?.value = it
+                    navController.navigate(ROUTE_COLLEGE_DETAILS)
+                }
             )
         } else {
             LazyVerticalGrid(
@@ -97,7 +103,10 @@ fun CollegeList(
                     CollegeCard(
                         image = R.drawable.college_icon,
                         collegeItem = item,
-                        onClick = { Log.e("sss/", it.toString()) }
+                        onClick = {
+                            homeViewModel?.sharedCollegeData?.value = it
+                            navController.navigate(ROUTE_COLLEGE_DETAILS)
+                        }
                     )
                 }
             }
@@ -225,6 +234,7 @@ fun PreviewCollegeList() {
         )
     )
     CollegeList(
+        homeViewModel = null,
         collegeData = collegeData,
         navController = rememberNavController()
     )
